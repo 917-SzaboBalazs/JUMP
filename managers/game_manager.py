@@ -12,9 +12,7 @@ class GameManager:
         self.__screen = None
         self.__fullscreen = fullscreen
 
-
         # Managers
-
         self.__player_manager = None
 
     def run(self):
