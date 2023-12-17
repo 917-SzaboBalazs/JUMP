@@ -21,6 +21,8 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+        self.__has_double_jump = True
+
     def update(self):
         self.rect.x += self.__speed_x
         self.rect.y += self.__speed_y
@@ -41,6 +43,11 @@ class Player(pygame.sprite.Sprite):
     def jump(self):
         if self.__speed_y == 0:
             self.__speed_y = -20
+            self.__has_double_jump = True
+
+        elif self.__has_double_jump:
+            self.__speed_y = -15
+            self.__has_double_jump = False
 
     def move_left(self):
         self.__speed_x = -5
