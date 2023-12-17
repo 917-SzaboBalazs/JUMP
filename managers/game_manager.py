@@ -1,7 +1,6 @@
 import pygame
 from assets import colors
-from entities import Player
-from .entity_manager import EntityManager
+from .player_manager import PlayerManager
 
 class GameManager:
 
@@ -12,7 +11,11 @@ class GameManager:
         self.__fps = fps
         self.__screen = None
         self.__fullscreen = fullscreen
-        self.__entity_manager = None
+
+
+        # Managers
+
+        self.__player_manager = None
 
     def run(self):
         self._initialize()
@@ -38,7 +41,7 @@ class GameManager:
         else:
             self.__screen = pygame.display.set_mode((self.__width, self.__height))
 
-        self.__entity_manager = EntityManager(screen=self.__screen)
+        self.__player_manager = PlayerManager(screen=self.__screen)
 
         pygame.display.set_caption(self.__caption)
 
@@ -49,17 +52,27 @@ class GameManager:
                 return True
             
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    self.__entity_manager.do_jump()
+                if event.key == pygame.K_w:
+                    self.__player_manager.do_jump()
+
+                elif event.key == pygame.K_a:
+                    self.__player_manager.move_left()
+
+                elif event.key == pygame.K_d:
+                    self.__player_manager.move_right()
+
+            if event.type == pygame.KEYUP:
+                if event.key in (pygame.K_a, pygame.K_d):
+                    self.__player_manager.stop_moving(key=event.key)
             
         return False
 
     def _run_logic(self) -> None:
-        self.__entity_manager.update_entities()
+        self.__player_manager.update()
 
     def _display_frame(self) -> None:
         self.__screen.fill(color=colors.WHITE)
 
-        self.__entity_manager.draw_entities(screen=self.__screen)
+        self.__player_manager.draw()
 
         pygame.display.flip()
