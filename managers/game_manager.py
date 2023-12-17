@@ -48,6 +48,10 @@ class GameManager:
             if event.type == pygame.QUIT:
                 return True
             
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.__entity_manager.do_jump()
+            
         return False
 
     def _run_logic(self) -> None:

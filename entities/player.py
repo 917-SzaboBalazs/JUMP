@@ -37,3 +37,8 @@ class Player(pygame.sprite.Sprite):
             'speed_x': self.__speed_x,
             'speed_y': self.__speed_y
         }
+
+    def jump(self):
+        print(f"Speed_y: {self.__speed_y}")
+        if self.__speed_y == 0:
+            self.__speed_y = -20
