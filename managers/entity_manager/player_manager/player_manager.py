@@ -1,6 +1,6 @@
 import pygame
-from .entity_manager import EntityManager
-from assets import Player
+from managers.entity_manager.entity_manager import EntityManager
+from assets.entities.player.player import Player
 
 class PlayerManager(EntityManager):
 

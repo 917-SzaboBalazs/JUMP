@@ -1,6 +1,6 @@
 import pygame
-from assets import colors
-from .player_manager import PlayerManager
+import assets.constants.colors as colors
+from managers.entity_manager.player_manager.player_manager import PlayerManager
 
 class GameManager:
 
